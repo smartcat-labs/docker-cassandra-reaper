@@ -1,0 +1,28 @@
+version: '2'
+networks:
+  reaper-network:
+services:
+  postgres:
+    image: kiasaki/alpine-postgres
+    networks:
+      - reaper-network
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: "10m"
+    ports:
+      - 5432:5432
+  reaper:
+    image: smartcat/cassandra-reaper
+    networks:
+      - reaper-network
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: "10m"
+    ports:
+      - 8080:8080
+      - 8090:8090
+      - 8091:8091
