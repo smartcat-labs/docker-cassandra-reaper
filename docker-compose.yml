@@ -22,6 +22,8 @@ services:
       options:
         max-file: "2"
         max-size: "10m"
+    volumes:
+      - ./cassandra-reaper.yaml:/opt/cassandra-reaper/cassandra-reaper.yaml:ro
     ports:
       - 8080:8080
       - 8090:8090
