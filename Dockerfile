@@ -26,14 +26,14 @@ RUN apk upgrade --update && \
     sed -i s/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=30/ $BUILD_JAVA_HOME/jre/lib/security/java.security && \
 	curl -sS -o /tmp/apache-maven-3.3.9-bin.tar.gz http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
 	tar -C /opt/build -xzf /tmp/apache-maven-3.3.9-bin.tar.gz && \
-	wget -P /tmp https://github.com/thelastpickle/cassandra-reaper/archive/master.zip && \
-	unzip /tmp/master.zip -d /opt/build -q && \
-	cd /opt/build/cassandra-reaper-master && \
+	wget -P /tmp https://github.com/thelastpickle/cassandra-reaper/archive/0.5.0.zip && \
+	unzip /tmp/0.5.0.zip -d /opt/build -q && \
+	cd /opt/build/cassandra-reaper-0.5.0 && \
 	export JAVA_HOME=/opt/build/jdk ; \
 	export PATH=/opt/build/jdk/bin:${PATH} ; \
 	  /opt/build/apache-maven-3.3.9/bin/mvn --batch-mode -Dmaven.test.skip=true package && \
 	mkdir /opt/cassandra-reaper && \
-	cp /opt/build/cassandra-reaper-master/target/cassandra-reaper*.jar /opt/cassandra-reaper/cassandra-reaper.jar && \
+	cp /opt/build/cassandra-reaper-0.5.0/target/cassandra-reaper*.jar /opt/cassandra-reaper/cassandra-reaper.jar && \
 	apk del curl openssl && \
 	rm -rf /opt/build /tmp/* /var/cache/apk/* /root/.m2
 
